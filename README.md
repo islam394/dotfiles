@@ -1,26 +1,21 @@
-# Fast Configuration
+# TITLE: dotfiles
 
-A high-performance Zsh configuration designed for speed, efficiency, and ultimate customization.
+This repo contains my dotfile configuration, allowing for a consistent computing experience across multiple machines.
+These days I primarily use GNU/Linux via the [[https://system76.org/pop][Pop!_os]].
 
-## Overview
+I manage the various configuration files in this repo using [[https://www.gnu.org/software/stow/][GNU Stow]].  This allows me to set up symlinks for all of my dotfiles using a single command:
 
-Fast Configuration is engineered to minimize startup time and deliver an instant, responsive terminal experience. This configuration is ideal for developers and power users who need a lightweight yet powerful Zsh setup, And This Config Have Zsh And Tmux Configs
+### Install GNU Stow
+```sh
+# it depend on your distro , if you are using debian or ubuntu based distro use this 
+sudo apt install stow
 
-## Features
+```
 
-- **Lightning Fast Startup:** Optimized to launch your terminal without delay.
-- **Intelligent Autocompletion:** Offers smart suggestions to speed up your workflow.
-- **Robust Plugin Management:** Seamlessly integrates popular plugins for autosuggestions, syntax highlighting, and more.
-- **Highly Customizable:** Easily tweak themes, prompt styles, and function behaviors to suit your needs.
-
-## My Plugins Used On The Config 
-1. [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions.git)
-2. [romkatv/powerlevel10k](https://github.com/romkatv/powerlevel10k.git)
-3. [Aloxaf/fzf-tab](https://github.com/Aloxaf/fzf-tab.git)
-4. [zdharma-continuum/fast-syntax-highlighting](https://github.com/zdharma-continuum/fast-syntax-highlighting) 
-5. [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions.git)
-6. [hlissner/zsh-autopair](https://github.com/hlissner/zsh-autopair) 
-7. [zdharma-continuum/zinit](https://github.com/zdharma-continuum/zinit.git)
-
-## Question & Answer
+### Install The Dot Files
+```sh
+git clone https://github.com/islam394/dotfiles.git
+cd dotfiles
+stow .
+```
 

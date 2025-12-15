@@ -1,0 +1,26 @@
+[user]
+	email = mstkhdmjwjl17@gmail.com
+	name = IslamMohamedSalama
+
+[safe]
+  # directory = /home/shared/Islam-Projects/Python
+  directory = /home/shared/Islam-Projects
+  directory = /home/islam/.config/zsh
+
+[color "status"]
+	added = blue bold
+	changed = green 
+	untracked  = red bold
+	modified = yellow bold
+
+[color "branch"]
+	remote = yellow bold
+	branch = white bold
+	
+[pull]
+	ff = only
+	rebase = false
+[init]
+	defaultBranch = main
+[http]
+	postBuffer = 524288000
