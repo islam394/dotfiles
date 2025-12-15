@@ -27,7 +27,7 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups 
 setopt hist_find_no_dups
 
-unsetopt beep mail_warning
+unsetopt beep mail_warning nomatch
 
 # Keybindings
 bindkey -e

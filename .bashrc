@@ -154,17 +154,17 @@ eval "$(starship init bash)"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 eval "$(zoxide init --cmd cd bash)"
 
-source ~/.local/share/blesh/ble.sh \
-   && ble-import -d integration/fzf-completion \
-   && ble-import -d integration/fzf-key-bindings \
-   || { # The '||' executes the block inside the {} if the chained commands fail
-        # echo "Warning: Failed during ble.sh setup or integration import." >&2
-        # echo "Applying fallback prompt settings..." >&2
- 
-        # Run the fallback command
-        # Reminder: Effectiveness depends on the shell/context.
-        # This might not be the standard Bash way to set prompt colors (PS1 variable is).
-        set color_prompt force_color_prompt
- 
-        # echo "Fallback 'set color_prompt force_color_prompt' executed." >&2
-      }
+# source ~/.local/share/blesh/ble.sh \
+#    && ble-import -d integration/fzf-completion \
+#    && ble-import -d integration/fzf-key-bindings \
+#    || { # The '||' executes the block inside the {} if the chained commands fail
+#         # echo "Warning: Failed during ble.sh setup or integration import." >&2
+#         # echo "Applying fallback prompt settings..." >&2
+#  
+#         # Run the fallback command
+#         # Reminder: Effectiveness depends on the shell/context.
+#         # This might not be the standard Bash way to set prompt colors (PS1 variable is).
+#         set color_prompt force_color_prompt
+#  
+#         # echo "Fallback 'set color_prompt force_color_prompt' executed." >&2
+#       }
