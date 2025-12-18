@@ -4,69 +4,39 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
- 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.cache/zsh/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
 HISTDUP=erase
-
-setopt histignorealldups 
-setopt sharehistory 
-setopt autocd 
+# History (clean, shared, sane)
+setopt sharehistory
+setopt appendhistory
+setopt histignorealldups
+setopt hist_ignore_space
+# Navigation & UX
+setopt interactivecomments
+setopt notify
+setopt correct
+# Globbing power
 setopt extendedglob
-setopt nomatch 
-setopt notify  
 setopt globdots
-setopt interactivecomments 
-setopt correct 
-setopt appendhistory  
-setopt hist_ignore_space 
-setopt hist_ignore_all_dups 
-setopt hist_save_no_dups 
-setopt hist_ignore_dups 
-setopt hist_find_no_dups
-
-unsetopt beep mail_warning nomatch
-
+# Politeness
+unsetopt beep
+unsetopt mail_warning
 # Keybindings
 bindkey -e
-
+# Load The Plugins 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/islam/.config/zsh/.zshrc'
-
-autoload -Uz compinit 
-compinit -Cd "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
-
-zmodload zsh/complist
-zmodload zsh/zprof
-(( ${+_comps} )) && _comps[zinit]=_zinit
-_comp_options+=(globdots)
-
+autoload -U compinit 
+compinit -d ~/.cache/zsh/.zcompdump
 # End of lines added by compinstall
 source ~/.config/zsh/tools/sources
-
 # Load completions
 zinit cdreplay -q
-
-# ranger-cd function
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi  
-    rm -f -- "$tempfile"
-}
-
-# BindKeys
-bindkey -s "^\er" "ranger-cd\n"
-
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
