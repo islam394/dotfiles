@@ -1,0 +1,25 @@
+#!/bin/bash
+
+package="$(
+  apt-cache pkgnames |
+    fzf -m --ansi --prompt="Enter Package Names: " \
+      --preview "nala show --color {} 2>/dev/null" \
+      --preview-window 'top:75%' |
+    tr "\n" " "
+)"
+
+if [[ -n "$package" ]]; then
+  # Count the number of packages (by counting words)
+  package_count=$(echo "$package" | wc -w)
+  
+  # Format display based on count
+  if [[ $package_count -eq 1 ]]; then
+    package_display="$package"
+  else
+    package_display=$(echo "$package" | sed 's/ /, /g')
+  fi
+  
+  read -n1 -p "Install ${package_display}? [y/N]: " install
+  echo
+  [[ "$install" == "y" ]] && sudo apt install $package
+fi
