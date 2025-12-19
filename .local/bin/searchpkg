@@ -1,25 +1,33 @@
 #!/bin/bash
 
-package="$(
+selected_packages=$(
   apt-cache pkgnames |
     fzf -m --ansi --prompt="Enter Package Names: " \
       --preview "nala show --color {} 2>/dev/null" \
-      --preview-window 'top:75%' |
-    tr "\n" " "
-)"
+      --preview-window 'top:75%' \
+      --bind 'ctrl-a:select-all' \
+      --bind 'ctrl-d:deselect-all'
+)
 
-if [[ -n "$package" ]]; then
-  # Count the number of packages (by counting words)
-  package_count=$(echo "$package" | wc -w)
+if [[ -n "$selected_packages" ]]; then
+  # For installation: space-separated
+  package=$(echo "$selected_packages" | tr "\n" " " | sed 's/ $//')
   
-  # Format display based on count
-  if [[ $package_count -eq 1 ]]; then
-    package_display="$package"
-  else
-    package_display=$(echo "$package" | sed 's/ /, /g')
-  fi
+  # For display: comma+space separated
+  # Replace newlines with comma+space, remove trailing comma+space if exists
+  package_display=$(echo "$selected_packages" | tr "\n" "," | sed 's/,$//; s/,/, /g')
   
-  read -n1 -p "Install ${package_display}? [y/N]: " install
+  # Count packages
+  package_count=$(echo "$selected_packages" | wc -l)
+  
+  echo -e "\nSelected $package_count package(s): \033[1;32m$package_display\033[0m"
+  read -n1 -p "Install? [y/N]: " install
   echo
-  [[ "$install" == "y" ]] && sudo apt install $package
+  if [[ "$install" == "y" ]] || [[ "$install" == "Y" ]]; then
+    sudo nala install $package
+  else
+    echo "Installation cancelled."
+  fi
+else
+  echo "No packages selected."
 fi
