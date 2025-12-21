@@ -20,7 +20,8 @@ zinit wait lucid for \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
  # atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-
+zinit ice as"program" pick"bin/git-fuzzy"
+zinit light bigH/git-fuzzy
 # zinit snippet OMZP::command-not-found
 # command-not-found plugin
 source /etc/zsh_command_not_found
